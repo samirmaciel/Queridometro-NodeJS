@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QueridometroApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".Feature.Modules.HomeScreen.HomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

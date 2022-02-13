@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QueridometroApp</string>
+    <string name="title_send_emoji">Send Emoji</string>
 </resources>
