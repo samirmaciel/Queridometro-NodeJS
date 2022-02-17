@@ -28,14 +28,14 @@ class UsersCarouselRecyclerViewAdapter : RecyclerView.Adapter<UsersCarouselRecyc
 
         fun bindItem(user : User){
 
-            if(itemList.size > 0){
+                itemView.findViewById<TextView>(R.id.tvUserName).text = user.name
                 itemView.findViewById<TextView>(R.id.tvCountBomb).text = user.emojis[0].toString()
                 itemView.findViewById<TextView>(R.id.tvCountHert).text = user.emojis[1].toString()
                 itemView.findViewById<TextView>(R.id.tvCountSmile).text = user.emojis[2].toString()
                 itemView.findViewById<TextView>(R.id.tvCountSad).text = user.emojis[3].toString()
                 itemView.findViewById<TextView>(R.id.tvCountPlant).text = user.emojis[4].toString()
                 itemView.findViewById<TextView>(R.id.tvCountSnake).text = user.emojis[5].toString()
-            }
+
 
         }
 

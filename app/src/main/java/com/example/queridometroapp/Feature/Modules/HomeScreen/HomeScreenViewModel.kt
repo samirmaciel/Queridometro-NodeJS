@@ -1,24 +1,24 @@
 package com.example.queridometroapp.Feature.Modules.HomeScreen
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.queridometroapp.Feature.Connetion.SocketHandler
+import com.example.queridometroapp.Feature.Domain.Model.User
+import com.example.queridometroapp.Feature.GetJson
 import io.socket.client.Socket
-import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
-import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.N)
 class HomeScreenViewModel : ViewModel(){
 
     lateinit var socketConnection : Socket
     private var connection : Socket? = null
     var checkConnection : MutableLiveData<String> = MutableLiveData()
     var userName : String = "Default"
-
-    var userList : MutableLiveData<MutableList<String>> = MutableLiveData(mutableListOf())
+    var emojiSelected : MutableLiveData<Int> = MutableLiveData(0)
+    var userList : MutableLiveData<MutableList<User>> = MutableLiveData(mutableListOf())
 
     init {
         socketConnection = SocketHandler.getSocket()
@@ -34,22 +34,33 @@ class HomeScreenViewModel : ViewModel(){
         socketConnection.emit("registerUser", userName )
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun setListeners(){
 
         socketConnection.on("usersUpdate") { args ->
-            if(args.size > 0){
 
-            }
-            Log.e("SOCKETFUCK", "setListeners: " )
+
         }
 
-        socketConnection.emit("json", "FOIFOI")
-
         socketConnection.on("usersUpdate") { args ->
-            Log.e("SOCKETFUCK", "setListeners: " + args[0].toString() )
+            val json = GetJson.getMap(args[0].toString())
+
+            val d : Map<String, Object> = json as Map<String, Object>
+
+            var tempList = mutableListOf<User>()
+            d.forEach { s, p ->
+                var e = GetJson.getArray(p.toString())
+                val user = User(
+                    name = s,
+                    emojis = e.toMutableList()
+                )
+                tempList.add(user)
+            }
+
+            userList.postValue(tempList)
+
         }
 
     }
-
 
 }

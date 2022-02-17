@@ -31,9 +31,11 @@
                 android:id="@+id/rvSelectEmoji"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSelectedEmoji"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
+                android:backgroundTint="@color/yellow"
                 android:text="@string/title_send"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -62,4 +62,8 @@ dependencies {
         //noinspection DuplicatePlatformClasses
         exclude group: 'org.json', module: 'json'
     }
+
+    implementation 'com.beust:klaxon:5.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+
 }

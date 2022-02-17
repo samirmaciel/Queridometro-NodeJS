@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.queridometroapp.Feature.Domain.Model.Emoji
 import com.example.queridometroapp.Feature.Modules.Adapter.SelectEmojiRecyclerAdapter
+import com.example.queridometroapp.Feature.Modules.HomeScreen.HomeScreenViewModel
 import com.example.queridometroapp.R
 import com.example.queridometroapp.databinding.BottomsheetSendemojiBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,6 +18,7 @@ class SelectEmojiBottomSheet : BottomSheetDialogFragment() {
     private var _binding : BottomsheetSendemojiBinding? = null
     private val binding : BottomsheetSendemojiBinding get() = _binding!!
     lateinit var recyclerAdapter : SelectEmojiRecyclerAdapter
+    private val viewModel : HomeScreenViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,10 +37,16 @@ class SelectEmojiBottomSheet : BottomSheetDialogFragment() {
     override fun onResume() {
         super.onResume()
         initComponents()
+
+        binding.btnSelectedEmoji.setOnClickListener{
+            dismiss()
+        }
     }
 
     private fun initComponents(){
-        recyclerAdapter = SelectEmojiRecyclerAdapter(getEmojiList(), requireContext())
+        recyclerAdapter = SelectEmojiRecyclerAdapter({ drawableID ->
+               viewModel.emojiSelected.value = drawableID
+        },getEmojiList(), requireContext())
         binding.rvSelectEmoji.layoutManager = GridLayoutManager(requireContext(),3)
         binding.rvSelectEmoji.adapter = recyclerAdapter
     }
@@ -60,7 +69,7 @@ class SelectEmojiBottomSheet : BottomSheetDialogFragment() {
                 R.drawable.planta
             ),
             Emoji(
-                R.drawable.planta
+                R.drawable.cobra
             )
         )
     }

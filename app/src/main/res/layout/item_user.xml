@@ -24,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/ivUserAvatar"
         app:cardBackgroundColor="@color/white">
         <TextView
+            android:id="@+id/tvUserName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Name"
