@@ -21,6 +21,7 @@ class HomeScreen : AppCompatActivity() {
     lateinit var recyclerAdapter : UsersCarouselRecyclerViewAdapter
     private val viewModel : HomeScreenViewModel by viewModels()
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomescreenBinding.inflate(layoutInflater)
@@ -32,7 +33,7 @@ class HomeScreen : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-//        Timer().scheduleAtFixedRate(ScrollTimer(), 10, 10)
+       //Timer().scheduleAtFixedRate(ScrollTimer(), 10, 10)
 
         viewModel.userName = intent.getStringExtra("userName").toString()
         viewModel.registerUserName()
@@ -42,8 +43,8 @@ class HomeScreen : AppCompatActivity() {
             binding.tvMessageConnection.text = it.toString()
         }
 
-        binding.btnSendEmoji.setOnClickListener{
-            SelectEmojiBottomSheet().show(supportFragmentManager, "SelectEmojiBottomSheet")
+        viewModel.usersConnectedCheck.observe(this){
+            binding.tvMessageConnection.text = "Users connected: ${it}"
         }
 
         recyclerAdapter.itemList = Mock.getUsersList()
@@ -53,12 +54,18 @@ class HomeScreen : AppCompatActivity() {
                 recyclerAdapter.itemList = it
                 recyclerAdapter.notifyDataSetChanged()
             }
-
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun initComponents() {
-        recyclerAdapter = UsersCarouselRecyclerViewAdapter()
+        recyclerAdapter = UsersCarouselRecyclerViewAdapter{ userName, position ->
+            SelectEmojiBottomSheet{ drawableID ->
+                var list = recyclerAdapter.itemList[position].emojis
+                list[Mock.getMapDrawbles()[drawableID]!!] = list[Mock.getMapDrawbles()[drawableID]!!] + 1
+                viewModel.sendEmojiToUser(mapOf(userName to  list))
+            }.show(supportFragmentManager, "BottomSheetSelectEmoji")
+        }
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvUsers.layoutManager = layoutManager
         binding.rvUsers.adapter = recyclerAdapter
@@ -72,11 +79,13 @@ class HomeScreen : AppCompatActivity() {
                 }
             })
         }
-
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
+        viewModel.socketConnection.disconnect()
         super.onDestroy()
         _binding = null
+
     }
 }

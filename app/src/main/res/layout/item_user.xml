@@ -6,6 +6,8 @@
 
     <ImageView
         android:id="@+id/ivUserAvatar"
+        android:focusable="true"
+        android:clickable="true"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="@id/cardViewName"

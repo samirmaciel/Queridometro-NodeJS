@@ -32,32 +32,35 @@ class SelectEmojiRecyclerAdapter(val itemClick : (Int) -> Unit, val itemList : L
 
          fun bindItem(position : Int, itemClick: (Int) -> Unit){
              emojiIcon.setImageResource(itemList[position].drawableID)
-
-             if(itemList[position].isSelected){
-                 cardView.setCardBackgroundColor(context.resources.getColor(R.color.blue))
-             }else{
-                 cardView.setCardBackgroundColor(context.resources.getColor(R.color.white))
+             emojiIcon.setOnClickListener{
+                 itemClick(itemList[position].drawableID)
              }
 
-             cardView.setOnClickListener{
-                 if(!itemList[position].isSelected){
-                     cardView.setCardBackgroundColor(context.resources.getColor(R.color.blue))
-                     itemList[position].isSelected= true
-                     itemClick(itemList[position].drawableID)
-                     itemList.forEach{
-                         if(itemList[position].drawableID != it.drawableID){
-                             it.isSelected = false
-                         }
-
-                         notifyDataSetChanged()
-                     }
-
-                 }else{
-                     cardView.setCardBackgroundColor(context.resources.getColor(R.color.white))
-                     itemList[position].isSelected = false
-                 }
-
-             }
+//             if(itemList[position].isSelected){
+//                 cardView.setCardBackgroundColor(context.resources.getColor(R.color.blue))
+//             }else{
+//                 cardView.setCardBackgroundColor(context.resources.getColor(R.color.white))
+//             }
+//
+//             cardView.setOnClickListener{
+//                 if(!itemList[position].isSelected){
+//                     cardView.setCardBackgroundColor(context.resources.getColor(R.color.blue))
+//                     itemList[position].isSelected= true
+//                     itemClick(itemList[position].drawableID)
+//                     itemList.forEach{
+//                         if(itemList[position].drawableID != it.drawableID){
+//                             it.isSelected = false
+//                         }
+//
+//                         notifyDataSetChanged()
+//                     }
+//
+//                 }else{
+//                     cardView.setCardBackgroundColor(context.resources.getColor(R.color.white))
+//                     itemList[position].isSelected = false
+//                 }
+//
+//             }
          }
      }
 }

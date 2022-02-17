@@ -9,19 +9,18 @@ import com.example.queridometroapp.Feature.Connetion.SocketHandler
 import com.example.queridometroapp.Feature.Domain.Model.User
 import com.example.queridometroapp.Feature.GetJson
 import io.socket.client.Socket
+import org.json.JSONObject
 
 @RequiresApi(Build.VERSION_CODES.N)
 class HomeScreenViewModel : ViewModel(){
 
-    lateinit var socketConnection : Socket
-    private var connection : Socket? = null
-    var checkConnection : MutableLiveData<String> = MutableLiveData()
+    var socketConnection : Socket = SocketHandler.getSocket()
+    var usersConnectedCheck : MutableLiveData<Int> = MutableLiveData(0)
     var userName : String = "Default"
     var emojiSelected : MutableLiveData<Int> = MutableLiveData(0)
     var userList : MutableLiveData<MutableList<User>> = MutableLiveData(mutableListOf())
 
     init {
-        socketConnection = SocketHandler.getSocket()
         setListeners()
         connect()
     }
@@ -38,13 +37,8 @@ class HomeScreenViewModel : ViewModel(){
     fun setListeners(){
 
         socketConnection.on("usersUpdate") { args ->
-
-
-        }
-
-        socketConnection.on("usersUpdate") { args ->
             val json = GetJson.getMap(args[0].toString())
-
+            Log.d("SOCKETFUCK", "setListeners: " + json.toString())
             val d : Map<String, Object> = json as Map<String, Object>
 
             var tempList = mutableListOf<User>()
@@ -56,11 +50,12 @@ class HomeScreenViewModel : ViewModel(){
                 )
                 tempList.add(user)
             }
-
             userList.postValue(tempList)
-
+            usersConnectedCheck.postValue(tempList.size)
         }
-
     }
 
+    fun sendEmojiToUser(userMap : Map<String, List<Int>>){
+        socketConnection.emit("sendEmojiForUser", JSONObject(userMap.toString()))
+    }
 }
