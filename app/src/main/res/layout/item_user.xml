@@ -35,166 +35,171 @@
             android:textColor="@color/blue"/>
     </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
+    <HorizontalScrollView
+        android:scrollbars="none"
         app:layout_constraintStart_toEndOf="@id/cardViewName"
         app:layout_constraintBottom_toBottomOf="@id/ivUserAvatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="@id/ivUserAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/bomba"/>
-                <TextView
-                    android:id="@+id/tvCountBomb"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:background="@drawable/emoji_card_background"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/bomba"/>
+                    <TextView
+                        android:id="@+id/tvCountBomb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/coracao"/>
-                <TextView
-                    android:id="@+id/tvCountHert"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:background="@drawable/emoji_card_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/coracao"/>
+                    <TextView
+                        android:id="@+id/tvCountHert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/sorriso"/>
-                <TextView
-                    android:id="@+id/tvCountSmile"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:background="@drawable/emoji_card_background"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/sorriso"/>
+                    <TextView
+                        android:id="@+id/tvCountSmile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/triste"/>
-                <TextView
-                    android:id="@+id/tvCountSad"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:background="@drawable/emoji_card_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/triste"/>
+                    <TextView
+                        android:id="@+id/tvCountSad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/planta"/>
-                <TextView
-                    android:id="@+id/tvCountPlant"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+                    android:background="@drawable/emoji_card_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/planta"/>
+                    <TextView
+                        android:id="@+id/tvCountPlant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            android:layout_marginHorizontal="5dp"
-            app:cardBackgroundColor="@color/blackfadeout">
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:layout_width="@dimen/emojiWidth"
-                    android:layout_height="@dimen/emojiHeight"
-                    android:src="@drawable/cobra"/>
-                <TextView
-                    android:id="@+id/tvCountSnake"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                android:layout_marginHorizontal="5dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
-
-
-    </LinearLayout>
+                    android:background="@drawable/emoji_card_background"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="@dimen/emojiWidth"
+                        android:layout_height="@dimen/emojiHeight"
+                        android:src="@drawable/cobra"/>
+                    <TextView
+                        android:id="@+id/tvCountSnake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

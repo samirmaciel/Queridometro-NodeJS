@@ -15,7 +15,7 @@ import com.example.queridometroapp.R
 import com.example.queridometroapp.databinding.BottomsheetSendemojiBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class SelectEmojiBottomSheet(val itemClick : (Int) -> Unit) : BottomSheetDialogFragment() {
+class SelectEmojiBottomSheet(val itemClick : (Int) -> Unit, val userSelectedName : String) : BottomSheetDialogFragment() {
 
     private var _binding : BottomsheetSendemojiBinding? = null
     private val binding : BottomsheetSendemojiBinding get() = _binding!!
@@ -40,6 +40,8 @@ class SelectEmojiBottomSheet(val itemClick : (Int) -> Unit) : BottomSheetDialogF
     override fun onResume() {
         super.onResume()
         initComponents()
+
+        binding.tvUserSelecteName.text = userSelectedName
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

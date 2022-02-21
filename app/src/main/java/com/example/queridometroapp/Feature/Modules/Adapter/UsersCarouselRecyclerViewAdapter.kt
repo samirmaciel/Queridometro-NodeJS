@@ -1,5 +1,6 @@
 package com.example.queridometroapp.Feature.Modules.Adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.queridometroapp.Feature.Domain.Model.User
 import com.example.queridometroapp.R
 
-class UsersCarouselRecyclerViewAdapter(val userClick : (String, Int) -> Unit) : RecyclerView.Adapter<UsersCarouselRecyclerViewAdapter.MyViewHolder>() {
+class UsersCarouselRecyclerViewAdapter(val userClick : (String, Int) -> Unit, val userConnectedName : String) : RecyclerView.Adapter<UsersCarouselRecyclerViewAdapter.MyViewHolder>() {
 
     var itemList = mutableListOf<User>()
 
@@ -29,7 +30,10 @@ class UsersCarouselRecyclerViewAdapter(val userClick : (String, Int) -> Unit) : 
 
         fun bindItem(position : Int, userClcik: (String, Int) -> Unit){
                 itemView.findViewById<ImageView>(R.id.ivUserAvatar).setOnClickListener{
-                    userClick(itemList[position].name, position)
+                    if(!itemList[position].name.equals(userConnectedName)){
+                        Log.d("SocketFuck", "bindItem: " + userConnectedName)
+                            userClick(itemList[position].name, position)
+                        }
                 }
 
                 itemView.findViewById<TextView>(R.id.tvUserName).text = itemList[position].name

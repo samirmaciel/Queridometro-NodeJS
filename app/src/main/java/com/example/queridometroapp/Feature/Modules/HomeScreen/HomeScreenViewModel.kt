@@ -3,8 +3,7 @@ package com.example.queridometroapp.Feature.Modules.HomeScreen
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.queridometroapp.Feature.Connetion.SocketHandler
 import com.example.queridometroapp.Feature.Domain.Model.User
 import com.example.queridometroapp.Feature.GetJson
@@ -16,7 +15,7 @@ class HomeScreenViewModel : ViewModel(){
 
     var socketConnection : Socket = SocketHandler.getSocket()
     var usersConnectedCheck : MutableLiveData<Int> = MutableLiveData(0)
-    var userName : String = "Default"
+    var userName : MutableLiveData<String> = MutableLiveData()
     var emojiSelected : MutableLiveData<Int> = MutableLiveData(0)
     var userList : MutableLiveData<MutableList<User>> = MutableLiveData(mutableListOf())
 
@@ -29,7 +28,7 @@ class HomeScreenViewModel : ViewModel(){
         socketConnection.connect()
     }
 
-    fun registerUserName(){
+    fun registerUserName(userName : String){
         socketConnection.emit("registerUser", userName )
     }
 

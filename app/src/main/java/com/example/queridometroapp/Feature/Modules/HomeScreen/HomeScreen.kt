@@ -26,7 +26,7 @@ class HomeScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomescreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initComponents()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -35,8 +35,12 @@ class HomeScreen : AppCompatActivity() {
 
        //Timer().scheduleAtFixedRate(ScrollTimer(), 10, 10)
 
-        viewModel.userName = intent.getStringExtra("userName").toString()
-        viewModel.registerUserName()
+        viewModel.userName.value = intent.getStringExtra("userName")
+
+        viewModel.userName.observe(this){   userConnectedname ->
+            viewModel.registerUserName(userConnectedname)
+            initComponents(userConnectedname)
+        }
 
         viewModel.emojiSelected.observe(this){
             binding.tvMessageConnection.visibility = View.VISIBLE
@@ -58,14 +62,14 @@ class HomeScreen : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun initComponents() {
-        recyclerAdapter = UsersCarouselRecyclerViewAdapter{ userName, position ->
-            SelectEmojiBottomSheet{ drawableID ->
+    private fun initComponents(userConnectedName : String) {
+        recyclerAdapter = UsersCarouselRecyclerViewAdapter({ userName, position ->
+            SelectEmojiBottomSheet({ drawableID ->
                 var list = recyclerAdapter.itemList[position].emojis
                 list[Mock.getMapDrawbles()[drawableID]!!] = list[Mock.getMapDrawbles()[drawableID]!!] + 1
                 viewModel.sendEmojiToUser(mapOf(userName to  list))
-            }.show(supportFragmentManager, "BottomSheetSelectEmoji")
-        }
+            }, "Sendo to: ${userName}").show(supportFragmentManager, "BottomSheetSelectEmoji")
+        }, userConnectedName)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvUsers.layoutManager = layoutManager
         binding.rvUsers.adapter = recyclerAdapter
